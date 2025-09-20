@@ -1,0 +1,64 @@
+<!-- Professional Header with Logo and Navigation -->
+<header class="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-sm">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between py-4">
+      <!-- Logo Container -->
+      <div class="flex-shrink-0">
+        <img
+          [src]="logoPath"
+          alt="Hirely Consultants Logo"
+          class="h-10 w-auto sm:h-12 md:h-14 transition-transform duration-200 hover:scale-105"
+          loading="lazy"
+        />
+      </div>
+
+      <!-- Navigation Menu -->
+      <nav class="hidden md:flex space-x-8">
+        <a
+          routerLink="/users"
+          routerLinkActive="text-blue-600 border-blue-600"
+          class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium border-b-2 border-transparent hover:border-blue-600 transition-all duration-200"
+        >
+          Employee Directory
+        </a>
+      </nav>
+
+      <!-- Mobile menu button -->
+      <div class="md:hidden">
+        <button
+          type="button"
+          class="text-gray-700 hover:text-blue-600 focus:outline-none focus:text-blue-600 transition-colors duration-200"
+          (click)="toggleMobileMenu()"
+        >
+          <svg
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Menu -->
+    <div class="md:hidden" [class.hidden]="!mobileMenuOpen">
+      <div class="px-2 pt-2 pb-3 space-y-1 border-t border-gray-100">
+        <a
+          routerLink="/users"
+          routerLinkActive="bg-blue-50 text-blue-600"
+          class="text-gray-700 hover:bg-gray-50 hover:text-blue-600 block px-3 py-2 text-base font-medium rounded-md transition-all duration-200"
+          (click)="closeMobileMenu()"
+        >
+          Employee Directory
+        </a>
+      </div>
+    </div>
+  </div>
+</header>

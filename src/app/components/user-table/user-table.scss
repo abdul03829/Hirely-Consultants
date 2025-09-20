@@ -1,0 +1,181 @@
+.user-table-container {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    sans-serif;
+}
+
+// Status badges styling
+.status-active {
+  background-color: #dcfce7;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+}
+
+.status-active-dot {
+  background-color: #10b981;
+}
+
+.status-inactive {
+  background-color: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+.status-inactive-dot {
+  background-color: #ef4444;
+}
+
+.status-on-leave {
+  background-color: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fde68a;
+}
+
+.status-on-leave-dot {
+  background-color: #f59e0b;
+}
+
+// Table styling enhancements
+.mat-mdc-table {
+  background: white;
+
+  .mat-mdc-header-row {
+    background-color: #f9fafb;
+  }
+
+  .mat-mdc-row {
+    &:hover {
+      background-color: #f9fafb;
+    }
+  }
+
+  .mat-mdc-cell,
+  .mat-mdc-header-cell {
+    border-bottom: 1px solid #e5e7eb;
+    padding: 16px 24px;
+  }
+
+  .mat-mdc-header-cell {
+    font-weight: 600;
+    color: #374151;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+}
+
+// Form field styling
+.mat-mdc-form-field {
+  .mat-mdc-form-field-flex {
+    background-color: white;
+  }
+
+  .mat-mdc-form-field-outline {
+    color: #d1d5db;
+  }
+
+  &.mat-focused .mat-mdc-form-field-outline-thick {
+    color: #3b82f6;
+  }
+
+  .mat-mdc-input-element {
+    color: #111827;
+  }
+
+  .mat-mdc-form-field-label {
+    color: #6b7280;
+  }
+}
+
+// Paginator styling
+.mat-mdc-paginator {
+  background: transparent;
+
+  .mat-mdc-select {
+    font-size: 14px;
+  }
+
+  .mat-mdc-paginator-navigation-button {
+    border-radius: 6px;
+  }
+
+  .mat-mdc-icon-button {
+    &:hover {
+      background-color: #f3f4f6;
+    }
+  }
+}
+
+// Card styling
+.mat-mdc-card {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  border: 1px solid #e5e7eb;
+}
+
+// Button styling
+.mat-mdc-raised-button {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+
+  &:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+}
+
+// Chip styling
+.mat-mdc-chip {
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+// Sort header styling
+.mat-sort-header-arrow {
+  color: #6b7280;
+}
+
+.mat-sort-header-sorted .mat-sort-header-arrow {
+  color: #3b82f6;
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .user-table-container {
+    padding: 16px;
+  }
+
+  .mat-mdc-cell,
+  .mat-mdc-header-cell {
+    padding: 12px 16px;
+  }
+
+  .mat-mdc-table {
+    font-size: 14px;
+  }
+}
+
+// Loading and empty states
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 48px 24px;
+  color: #6b7280;
+
+  .mat-icon {
+    font-size: 48px;
+    height: 48px;
+    width: 48px;
+    margin-bottom: 16px;
+    color: #d1d5db;
+  }
+}
+
+// Animation for row hover
+.mat-mdc-row {
+  transition: background-color 0.15s ease-in-out;
+}
