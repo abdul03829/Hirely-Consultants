@@ -237,10 +237,14 @@ export class UserTable implements OnInit, AfterViewInit {
       status: employeeData.status!,
     };
 
-    // Add to the data source
+    // Add to the beginning of the data source (first record)
     const currentData = this.dataSource.data;
-    currentData.push(newEmployee);
-    this.dataSource.data = [...currentData];
+    this.dataSource.data = [newEmployee, ...currentData];
+
+    // Reset pagination to first page to show the new employee
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
 
     // TODO: In a real application, you would call the API to save the employee
     // this.userService.createUser(newEmployee).subscribe(...)
