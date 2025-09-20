@@ -36,32 +36,33 @@
       </div>
     </div>
 
-    <!-- Compact Search Section -->
-    <div class="px-8 py-4 bg-gray-50/50">
-      <div class="flex items-center space-x-4">
-        <div class="flex-1">
-          <mat-form-field
-            appearance="outline"
-            class="w-full compact-search-field"
-          >
+    <!-- Sleek Search Section -->
+    <div class="px-8 py-6 bg-gradient-to-br from-blue-50/30 to-purple-50/30">
+      <div class="flex items-center justify-end space-x-4">
+        <!-- Right-aligned Search Bar and Button -->
+        <div class="sleek-search-container">
+          <div class="sleek-search-wrapper">
             <input
-              matInput
               [(ngModel)]="searchValue"
               (keyup)="applyFilter()"
               placeholder="Search employees..."
-              class="text-sm"
+              class="sleek-search-input"
             />
-            <mat-icon matPrefix class="text-gray-400 mr-2">search</mat-icon>
-          </mat-form-field>
+            <button class="sleek-search-btn" (click)="applyFilter()">
+              <mat-icon>search</mat-icon>
+            </button>
+          </div>
+          <button
+            *ngIf="searchValue"
+            (click)="clearFilter()"
+            class="clear-search-btn"
+            matTooltip="Clear search"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
         </div>
-        <button
-          mat-raised-button
-          *ngIf="searchValue"
-          (click)="clearFilter()"
-          class="compact-clear-btn"
-        >
-          <mat-icon>clear</mat-icon>
-        </button>
+
+        <!-- Add Employee Button -->
         <button
           mat-raised-button
           class="add-employee-btn bg-gradient-to-r from-blue-500 to-purple-600 text-white"

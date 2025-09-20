@@ -88,8 +88,15 @@ export class UserTable implements OnInit, AfterViewInit {
   }
 
   loadUsers(): void {
-    this.userService.getUsers().subscribe((users) => {
-      this.dataSource.data = users;
+    console.log('Loading users from API...');
+    this.userService.getUsers().subscribe({
+      next: (users) => {
+        console.log('Users loaded successfully:', users);
+        this.dataSource.data = users;
+      },
+      error: (error) => {
+        console.error('Error loading users:', error);
+      },
     });
   }
 

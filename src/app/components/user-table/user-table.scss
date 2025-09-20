@@ -3,6 +3,118 @@
     sans-serif;
 }
 
+// Sleek search bar styling (right-aligned layout)
+.sleek-search-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.sleek-search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 50px;
+  box-shadow: 0 8px 32px rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  width: 400px;
+
+  &:hover {
+    box-shadow: 0 12px 40px rgba(59, 130, 246, 0.25);
+    transform: translateY(-2px);
+    border-color: rgba(99, 102, 241, 0.3);
+  }
+
+  &:focus-within {
+    box-shadow: 0 12px 40px rgba(99, 102, 241, 0.3);
+    transform: translateY(-2px);
+    border-color: rgba(99, 102, 241, 0.5);
+  }
+}
+
+.sleek-search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 16px 24px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #374151;
+
+  &::placeholder {
+    color: #9ca3af;
+    font-weight: 400;
+  }
+
+  &:focus::placeholder {
+    opacity: 0.7;
+  }
+}
+
+.sleek-search-btn {
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 4px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
+
+  .mat-icon {
+    color: white;
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.clear-search-btn {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  .mat-icon {
+    color: #ef4444;
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+  }
+
+  &:hover {
+    background: rgba(239, 68, 68, 0.15);
+    border-color: rgba(239, 68, 68, 0.3);
+    transform: scale(1.05);
+  }
+}
+
 // Compact search field styling
 .compact-search-field {
   .mat-mdc-form-field-flex {
@@ -321,6 +433,52 @@
 @media (max-width: 768px) {
   .user-table-container {
     padding: 12px;
+  }
+
+  // Stack search and button vertically on mobile
+  .sleek-search-container {
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .sleek-search-wrapper {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .sleek-search-input {
+    padding: 14px 20px;
+    font-size: 14px;
+  }
+
+  .sleek-search-btn {
+    width: 44px;
+    height: 44px;
+
+    .mat-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  .clear-search-btn {
+    width: 36px;
+    height: 36px;
+
+    .mat-icon {
+      font-size: 16px;
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  // Mobile: change to column layout and center items
+  .px-8.py-6 > .flex {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
   }
 
   .compact-table {

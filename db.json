@@ -1,0 +1,148 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "firstName": "John",
+      "lastName": "Doe",
+      "email": "john.doe@hirely.com",
+      "phone": "+1 (555) 123-4567",
+      "position": "Senior Software Engineer",
+      "department": "Engineering",
+      "salary": 95000,
+      "joinDate": "2022-03-15T00:00:00.000Z",
+      "status": "Active"
+    },
+    {
+      "id": 2,
+      "firstName": "Sarah",
+      "lastName": "Johnson",
+      "email": "sarah.johnson@hirely.com",
+      "phone": "+1 (555) 234-5678",
+      "position": "Product Manager",
+      "department": "Product",
+      "salary": 105000,
+      "joinDate": "2021-08-20T00:00:00.000Z",
+      "status": "Active"
+    },
+    {
+      "id": 3,
+      "firstName": "Michael",
+      "lastName": "Chen",
+      "email": "michael.chen@hirely.com",
+      "phone": "+1 (555) 345-6789",
+      "position": "UX Designer",
+      "department": "Design",
+      "salary": 78000,
+      "joinDate": "2023-01-10T00:00:00.000Z",
+      "status": "Active"
+    },
+    {
+      "id": 4,
+      "firstName": "Emily",
+      "lastName": "Rodriguez",
+      "email": "emily.rodriguez@hirely.com",
+      "phone": "+1 (555) 456-7890",
+      "position": "Data Analyst",
+      "department": "Analytics",
+      "salary": 72000,
+      "joinDate": "2022-11-05T00:00:00.000Z",
+      "status": "On Leave"
+    },
+    {
+      "id": 5,
+      "firstName": "David",
+      "lastName": "Wilson",
+      "email": "david.wilson@hirely.com",
+      "phone": "+1 (555) 567-8901",
+      "position": "DevOps Engineer",
+      "department": "Engineering",
+      "salary": 88000,
+      "joinDate": "2021-06-12T00:00:00.000Z",
+      "status": "Active"
+    },
+    {
+      "id": 6,
+      "firstName": "Lisa",
+      "lastName": "Brown",
+      "email": "lisa.brown@hirely.com",
+      "phone": "+1 (555) 678-9012",
+      "position": "HR Manager",
+      "department": "Human Resources",
+      "salary": 82000,
+      "joinDate": "2020-09-30T00:00:00.000Z",
+      "status": "Active"
+    },
+    {
+      "id": 7,
+      "firstName": "Robert",
+      "lastName": "Taylor",
+      "email": "robert.taylor@hirely.com",
+      "phone": "+1 (555) 789-0123",
+      "position": "Marketing Specialist",
+      "department": "Marketing",
+      "salary": 65000,
+      "joinDate": "2023-04-18T00:00:00.000Z",
+      "status": "Active"
+    },
+    {
+      "id": 8,
+      "firstName": "Jennifer",
+      "lastName": "Martinez",
+      "email": "jennifer.martinez@hirely.com",
+      "phone": "+1 (555) 890-1234",
+      "position": "QA Engineer",
+      "department": "Engineering",
+      "salary": 75000,
+      "joinDate": "2022-07-22T00:00:00.000Z",
+      "status": "Inactive"
+    },
+    {
+      "id": 9,
+      "firstName": "James",
+      "lastName": "Anderson",
+      "email": "james.anderson@hirely.com",
+      "phone": "+1 (555) 901-2345",
+      "position": "Finance Analyst",
+      "department": "Finance",
+      "salary": 70000,
+      "joinDate": "2021-12-03T00:00:00.000Z",
+      "status": "Active"
+    },
+    {
+      "id": 10,
+      "firstName": "Amanda",
+      "lastName": "Garcia",
+      "email": "amanda.garcia@hirely.com",
+      "phone": "+1 (555) 012-3456",
+      "position": "Sales Representative",
+      "department": "Sales",
+      "salary": 68000,
+      "joinDate": "2023-02-14T00:00:00.000Z",
+      "status": "Active"
+    },
+    {
+      "id": 11,
+      "firstName": "Christopher",
+      "lastName": "Thompson",
+      "email": "christopher.thompson@hirely.com",
+      "phone": "+1 (555) 123-4567",
+      "position": "Backend Developer",
+      "department": "Engineering",
+      "salary": 92000,
+      "joinDate": "2022-05-08T00:00:00.000Z",
+      "status": "Active"
+    },
+    {
+      "id": 12,
+      "firstName": "Michelle",
+      "lastName": "White",
+      "email": "michelle.white@hirely.com",
+      "phone": "+1 (555) 234-5678",
+      "position": "Content Writer",
+      "department": "Marketing",
+      "salary": 58000,
+      "joinDate": "2023-06-25T00:00:00.000Z",
+      "status": "On Leave"
+    }
+  ]
+}
