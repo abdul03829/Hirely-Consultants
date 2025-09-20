@@ -1,107 +1,86 @@
 <div
   class="user-table-container mx-auto max-w-7xl p-4 sm:p-6 lg:p-8 min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50"
 >
-  <!-- Modern Header Section -->
-  <div class="mb-8">
+  <!-- Single Modern Container -->
+  <div
+    class="bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl border border-white/20 overflow-hidden"
+  >
+    <!-- Header with Title and Count -->
     <div
-      class="relative overflow-hidden bg-white/70 backdrop-blur-sm rounded-3xl shadow-lg border border-white/20 p-8"
+      class="px-8 py-6 border-b border-gray-100/50 bg-gradient-to-r from-blue-50/50 to-purple-50/50"
     >
-      <div
-        class="absolute inset-0 bg-gradient-to-r from-blue-600/5 to-purple-600/5"
-      ></div>
-      <div
-        class="relative flex flex-col lg:flex-row lg:items-center lg:justify-between"
-      >
-        <div class="mb-6 lg:mb-0">
-          <div class="flex items-center mb-3">
-            <div
-              class="p-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl mr-4"
+      <div class="flex items-center justify-between">
+        <div class="flex items-center">
+          <div
+            class="p-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl mr-4"
+          >
+            <mat-icon class="text-white text-xl">groups</mat-icon>
+          </div>
+          <div>
+            <h1
+              class="text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent"
             >
-              <mat-icon class="text-white text-2xl">groups</mat-icon>
-            </div>
-            <div>
-              <h1
-                class="text-4xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent"
-              >
-                Employee Directory
-              </h1>
-              <p class="mt-2 text-gray-600 font-medium">
-                Discover and manage your team with style
-              </p>
-            </div>
+              Employee Directory
+            </h1>
+            <p class="text-sm text-gray-600 font-medium">
+              Manage your team efficiently
+            </p>
           </div>
         </div>
-        <div class="flex items-center space-x-4">
-          <div
-            class="bg-gradient-to-r from-blue-500 to-purple-600 p-4 rounded-2xl text-white shadow-lg"
-          >
-            <div class="text-center">
-              <div class="text-2xl font-bold">{{ dataSource.data.length }}</div>
-              <div class="text-sm opacity-90">Total Employees</div>
-            </div>
+        <div
+          class="bg-gradient-to-r from-blue-500 to-purple-600 px-6 py-3 rounded-2xl text-white shadow-lg"
+        >
+          <div class="text-center">
+            <div class="text-lg font-bold">{{ dataSource.data.length }}</div>
+            <div class="text-xs opacity-90">Total</div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Modern Search and Filter Section -->
-  <div class="mb-8">
-    <div
-      class="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 p-6"
-    >
-      <div
-        class="flex flex-col lg:flex-row lg:items-center lg:space-x-6 space-y-4 lg:space-y-0"
-      >
+    <!-- Compact Search Section -->
+    <div class="px-8 py-4 bg-gray-50/50">
+      <div class="flex items-center space-x-4">
         <div class="flex-1">
           <mat-form-field
             appearance="outline"
-            class="w-full modern-search-field"
+            class="w-full compact-search-field"
           >
-            <mat-label>Search employees...</mat-label>
             <input
               matInput
               [(ngModel)]="searchValue"
               (keyup)="applyFilter()"
-              placeholder="Search by name, email, position, or department"
+              placeholder="Search employees..."
               class="text-sm"
             />
-            <mat-icon matSuffix class="text-gray-400">search</mat-icon>
+            <mat-icon matPrefix class="text-gray-400 mr-2">search</mat-icon>
           </mat-form-field>
         </div>
-        <div class="flex space-x-3">
-          <button
-            mat-raised-button
-            *ngIf="searchValue"
-            (click)="clearFilter()"
-            class="modern-clear-btn bg-gradient-to-r from-red-500 to-pink-500 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200"
-          >
-            <mat-icon class="mr-2">clear</mat-icon>
-            Clear
-          </button>
-          <button
-            mat-raised-button
-            color="primary"
-            class="modern-action-btn bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200"
-          >
-            <mat-icon class="mr-2">add</mat-icon>
-            Add Employee
-          </button>
-        </div>
+        <button
+          mat-raised-button
+          *ngIf="searchValue"
+          (click)="clearFilter()"
+          class="compact-clear-btn"
+        >
+          <mat-icon>clear</mat-icon>
+        </button>
+        <button
+          mat-raised-button
+          class="add-employee-btn bg-gradient-to-r from-blue-500 to-purple-600 text-white"
+        >
+          <mat-icon class="mr-2">add</mat-icon>
+          Add Employee
+        </button>
       </div>
     </div>
-  </div>
 
-  <!-- Modern Table Section -->
-  <div
-    class="bg-white/70 backdrop-blur-sm rounded-3xl shadow-xl border border-white/20 overflow-hidden"
-  >
+    <!-- Modern Table Section -->
     <div class="overflow-x-auto">
       <table
         mat-table
         [dataSource]="dataSource"
         matSort
-        class="w-full modern-table"
+        class="w-full compact-table"
       >
         <!-- ID Column -->
         <ng-container matColumnDef="id">
@@ -109,19 +88,15 @@
             mat-header-cell
             *matHeaderCellDef
             mat-sort-header
-            class="modern-header-cell"
+            class="compact-header-cell"
           >
             <div class="flex items-center">
-              <mat-icon class="text-gray-500 mr-2 text-lg">tag</mat-icon>
+              <mat-icon class="text-gray-500 mr-1 text-sm">tag</mat-icon>
               ID
             </div>
           </th>
-          <td mat-cell *matCellDef="let user" class="modern-cell">
-            <span
-              class="bg-gradient-to-r from-blue-100 to-purple-100 text-blue-800 px-3 py-1 rounded-full text-xs font-semibold"
-            >
-              #{{ user.id }}
-            </span>
+          <td mat-cell *matCellDef="let user" class="compact-cell">
+            <span class="id-badge">#{{ user.id }}</span>
           </td>
         </ng-container>
 
@@ -131,30 +106,24 @@
             mat-header-cell
             *matHeaderCellDef
             mat-sort-header="firstName"
-            class="modern-header-cell"
+            class="compact-header-cell"
           >
             <div class="flex items-center">
-              <mat-icon class="text-gray-500 mr-2 text-lg">person</mat-icon>
+              <mat-icon class="text-gray-500 mr-1 text-sm">person</mat-icon>
               Name
             </div>
           </th>
-          <td mat-cell *matCellDef="let user" class="modern-cell">
+          <td mat-cell *matCellDef="let user" class="compact-cell">
             <div class="flex items-center">
-              <div class="relative flex-shrink-0 h-12 w-12 mr-4">
-                <div
-                  class="h-12 w-12 rounded-2xl bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 flex items-center justify-center text-white font-bold text-sm shadow-lg ring-2 ring-white"
-                >
-                  {{ user.firstName.charAt(0) }}{{ user.lastName.charAt(0) }}
-                </div>
-                <div
-                  class="absolute -bottom-1 -right-1 h-4 w-4 bg-green-400 rounded-full border-2 border-white"
-                ></div>
+              <div class="avatar-small">
+                {{ user.firstName.charAt(0) }}{{ user.lastName.charAt(0) }}
               </div>
-              <div>
-                <div class="text-sm font-bold text-gray-900">
+              <div class="ml-3">
+                <div
+                  class="text-sm font-semibold text-gray-900 whitespace-nowrap"
+                >
                   {{ user.firstName }} {{ user.lastName }}
                 </div>
-                <div class="text-xs text-gray-500 font-medium">Employee</div>
               </div>
             </div>
           </td>
@@ -166,21 +135,18 @@
             mat-header-cell
             *matHeaderCellDef
             mat-sort-header
-            class="modern-header-cell"
+            class="compact-header-cell"
           >
             <div class="flex items-center">
-              <mat-icon class="text-gray-500 mr-2 text-lg">email</mat-icon>
+              <mat-icon class="text-gray-500 mr-1 text-sm">email</mat-icon>
               Email
             </div>
           </th>
-          <td mat-cell *matCellDef="let user" class="modern-cell">
+          <td mat-cell *matCellDef="let user" class="compact-cell">
             <a
               href="mailto:{{ user.email }}"
-              class="inline-flex items-center text-sm bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-200"
+              class="email-link whitespace-nowrap"
             >
-              <mat-icon class="text-blue-500 mr-2 text-sm"
-                >mail_outline</mat-icon
-              >
               {{ user.email }}
             </a>
           </td>
@@ -188,19 +154,16 @@
 
         <!-- Phone Column -->
         <ng-container matColumnDef="phone">
-          <th mat-header-cell *matHeaderCellDef class="modern-header-cell">
+          <th mat-header-cell *matHeaderCellDef class="compact-header-cell">
             <div class="flex items-center">
-              <mat-icon class="text-gray-500 mr-2 text-lg">phone</mat-icon>
+              <mat-icon class="text-gray-500 mr-1 text-sm">phone</mat-icon>
               Phone
             </div>
           </th>
-          <td mat-cell *matCellDef="let user" class="modern-cell">
-            <div class="flex items-center text-sm text-gray-700 font-medium">
-              <mat-icon class="text-green-500 mr-2 text-sm"
-                >phone_outlined</mat-icon
-              >
-              {{ user.phone }}
-            </div>
+          <td mat-cell *matCellDef="let user" class="compact-cell">
+            <span class="text-sm text-gray-700 whitespace-nowrap">{{
+              user.phone
+            }}</span>
           </td>
         </ng-container>
 
@@ -210,17 +173,17 @@
             mat-header-cell
             *matHeaderCellDef
             mat-sort-header
-            class="modern-header-cell"
+            class="compact-header-cell"
           >
             <div class="flex items-center">
-              <mat-icon class="text-gray-500 mr-2 text-lg">work</mat-icon>
+              <mat-icon class="text-gray-500 mr-1 text-sm">work</mat-icon>
               Position
             </div>
           </th>
-          <td mat-cell *matCellDef="let user" class="modern-cell">
-            <div class="text-sm font-bold text-gray-900">
-              {{ user.position }}
-            </div>
+          <td mat-cell *matCellDef="let user" class="compact-cell">
+            <span class="text-sm font-medium text-gray-900 whitespace-nowrap">{{
+              user.position
+            }}</span>
           </td>
         </ng-container>
 
@@ -230,20 +193,15 @@
             mat-header-cell
             *matHeaderCellDef
             mat-sort-header
-            class="modern-header-cell"
+            class="compact-header-cell"
           >
             <div class="flex items-center">
-              <mat-icon class="text-gray-500 mr-2 text-lg">business</mat-icon>
+              <mat-icon class="text-gray-500 mr-1 text-sm">business</mat-icon>
               Department
             </div>
           </th>
-          <td mat-cell *matCellDef="let user" class="modern-cell">
-            <span
-              class="inline-flex items-center px-3 py-1.5 rounded-xl text-xs font-bold bg-gradient-to-r from-indigo-100 to-blue-100 text-indigo-800 border border-indigo-200"
-            >
-              <div class="w-2 h-2 bg-indigo-500 rounded-full mr-2"></div>
-              {{ user.department }}
-            </span>
+          <td mat-cell *matCellDef="let user" class="compact-cell">
+            <span class="department-badge">{{ user.department }}</span>
           </td>
         </ng-container>
 
@@ -253,21 +211,17 @@
             mat-header-cell
             *matHeaderCellDef
             mat-sort-header
-            class="modern-header-cell"
+            class="compact-header-cell"
           >
             <div class="flex items-center">
-              <mat-icon class="text-gray-500 mr-2 text-lg"
+              <mat-icon class="text-gray-500 mr-1 text-sm"
                 >attach_money</mat-icon
               >
               Salary
             </div>
           </th>
-          <td mat-cell *matCellDef="let user" class="modern-cell">
-            <div
-              class="text-sm font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent"
-            >
-              {{ formatSalary(user.salary) }}
-            </div>
+          <td mat-cell *matCellDef="let user" class="compact-cell">
+            <span class="salary-text">{{ formatSalary(user.salary) }}</span>
           </td>
         </ng-container>
 
@@ -277,20 +231,17 @@
             mat-header-cell
             *matHeaderCellDef
             mat-sort-header
-            class="modern-header-cell"
+            class="compact-header-cell"
           >
             <div class="flex items-center">
-              <mat-icon class="text-gray-500 mr-2 text-lg">event</mat-icon>
+              <mat-icon class="text-gray-500 mr-1 text-sm">event</mat-icon>
               Join Date
             </div>
           </th>
-          <td mat-cell *matCellDef="let user" class="modern-cell">
-            <div class="flex items-center text-sm text-gray-700 font-medium">
-              <mat-icon class="text-purple-500 mr-2 text-sm"
-                >calendar_today</mat-icon
-              >
-              {{ formatDate(user.joinDate) }}
-            </div>
+          <td mat-cell *matCellDef="let user" class="compact-cell">
+            <span class="text-sm text-gray-700 whitespace-nowrap">{{
+              formatDate(user.joinDate)
+            }}</span>
           </td>
         </ng-container>
 
@@ -300,17 +251,17 @@
             mat-header-cell
             *matHeaderCellDef
             mat-sort-header
-            class="modern-header-cell"
+            class="compact-header-cell"
           >
             <div class="flex items-center">
-              <mat-icon class="text-gray-500 mr-2 text-lg">info</mat-icon>
+              <mat-icon class="text-gray-500 mr-1 text-sm">info</mat-icon>
               Status
             </div>
           </th>
-          <td mat-cell *matCellDef="let user" class="modern-cell">
+          <td mat-cell *matCellDef="let user" class="compact-cell">
             <span
               [class]="getStatusClass(user.status)"
-              class="modern-status-badge"
+              class="compact-status-badge"
             >
               <span
                 class="status-dot"
@@ -321,65 +272,78 @@
           </td>
         </ng-container>
 
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef class="compact-header-cell">
+            <div class="flex items-center">
+              <mat-icon class="text-gray-500 mr-1 text-sm">settings</mat-icon>
+              Actions
+            </div>
+          </th>
+          <td mat-cell *matCellDef="let user" class="compact-cell">
+            <div class="flex items-center space-x-2">
+              <button
+                mat-icon-button
+                class="action-btn edit-btn"
+                (click)="editUser(user)"
+                matTooltip="Edit Employee"
+              >
+                <mat-icon class="text-blue-600">edit</mat-icon>
+              </button>
+              <button
+                mat-icon-button
+                class="action-btn delete-btn"
+                (click)="deleteUser(user)"
+                matTooltip="Delete Employee"
+              >
+                <mat-icon class="text-red-600">delete</mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+
         <tr
           mat-header-row
           *matHeaderRowDef="displayedColumns; sticky: true"
-          class="modern-header-row"
+          class="compact-header-row"
         ></tr>
         <tr
           mat-row
           *matRowDef="let row; columns: displayedColumns"
-          class="modern-row group hover:bg-gradient-to-r hover:from-blue-50/50 hover:to-purple-50/50 transition-all duration-300 cursor-pointer"
+          class="compact-row hover:bg-blue-50/50 transition-all duration-200 cursor-pointer"
         ></tr>
       </table>
     </div>
 
-    <!-- Modern No Data Message -->
-    <div *ngIf="dataSource.filteredData.length === 0" class="text-center py-16">
-      <div class="relative">
-        <div class="absolute inset-0 flex items-center justify-center">
-          <div
-            class="w-32 h-32 bg-gradient-to-br from-blue-100 to-purple-100 rounded-full opacity-20"
-          ></div>
-        </div>
-        <div class="relative">
-          <mat-icon class="text-6xl text-gray-300 mb-6">search_off</mat-icon>
-          <h3 class="text-xl font-bold text-gray-900 mb-3">
-            No employees found
-          </h3>
-          <p class="text-gray-500 mb-6 max-w-md mx-auto">
-            We couldn't find any employees matching your search criteria. Try
-            adjusting your filters or clearing your search.
-          </p>
-          <button
-            mat-raised-button
-            (click)="clearFilter()"
-            class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200"
-          >
-            <mat-icon class="mr-2">refresh</mat-icon>
-            Reset Filters
-          </button>
-        </div>
-      </div>
+    <!-- Compact No Data Message -->
+    <div *ngIf="dataSource.filteredData.length === 0" class="text-center py-12">
+      <mat-icon class="text-4xl text-gray-300 mb-4">search_off</mat-icon>
+      <h3 class="text-lg font-semibold text-gray-900 mb-2">
+        No employees found
+      </h3>
+      <p class="text-gray-500 mb-4">Try adjusting your search criteria.</p>
+      <button
+        mat-raised-button
+        (click)="clearFilter()"
+        class="bg-blue-500 text-white px-4 py-2 rounded-lg"
+      >
+        Reset Search
+      </button>
     </div>
 
-    <!-- Modern Pagination -->
+    <!-- Compact Pagination -->
     <div
-      class="bg-gradient-to-r from-gray-50 to-blue-50 px-6 py-4 border-t border-gray-200/50"
+      class="bg-gray-50/50 px-6 py-3 border-t border-gray-200/50 flex justify-between items-center"
     >
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-        <div class="mb-4 sm:mb-0">
-          <p class="text-sm text-gray-600 font-medium">
-            Showing {{ getPaginationText() }}
-          </p>
-        </div>
-        <mat-paginator
-          [pageSizeOptions]="[5, 10, 25, 50]"
-          [pageSize]="10"
-          showFirstLastButtons
-          class="bg-transparent modern-paginator"
-        ></mat-paginator>
+      <div class="text-sm text-gray-600 font-medium">
+        Showing {{ getPaginationText() }}
       </div>
+      <mat-paginator
+        [pageSizeOptions]="[5, 10, 25, 50]"
+        [pageSize]="10"
+        showFirstLastButtons
+        class="bg-transparent"
+      ></mat-paginator>
     </div>
   </div>
 </div>

@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { UserService } from '../../services/user';
 import { User } from '../../models/user.model';
 
@@ -30,6 +31,7 @@ import { User } from '../../models/user.model';
     MatChipsModule,
     MatCardModule,
     MatToolbarModule,
+    MatTooltipModule,
   ],
   templateUrl: './user-table.html',
   styleUrl: './user-table.scss',
@@ -48,6 +50,7 @@ export class UserTable implements OnInit, AfterViewInit {
     'salary',
     'joinDate',
     'status',
+    'actions',
   ];
 
   dataSource = new MatTableDataSource<User>();
@@ -147,5 +150,15 @@ export class UserTable implements OnInit, AfterViewInit {
     const total = this.dataSource.data.length;
 
     return `${startIndex} to ${endIndex} of ${total} employees`;
+  }
+
+  editUser(user: User): void {
+    console.log('Editing user:', user);
+    // TODO: Implement edit functionality
+  }
+
+  deleteUser(user: User): void {
+    console.log('Deleting user:', user);
+    // TODO: Implement delete functionality with confirmation
   }
 }
