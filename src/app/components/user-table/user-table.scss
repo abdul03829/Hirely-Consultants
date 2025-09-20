@@ -88,12 +88,74 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
     border-bottom: none;
+    white-space: nowrap;
+    min-width: fit-content;
+    width: auto;
 
     .mat-icon {
-      opacity: 0.7;
-      font-size: 16px;
-      width: 16px;
-      height: 16px;
+      opacity: 1;
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+      margin-right: 8px;
+      transition: all 0.3s ease;
+    }
+
+    // Beautiful colorized header icons
+    .header-icon-id {
+      color: #6366f1 !important; // Indigo for ID
+      text-shadow: 0 0 10px rgba(99, 102, 241, 0.3);
+    }
+
+    .header-icon-name {
+      color: #10b981 !important; // Emerald for Name
+      text-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+    }
+
+    .header-icon-email {
+      color: #f59e0b !important; // Amber for Email
+      text-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
+    }
+
+    .header-icon-phone {
+      color: #8b5cf6 !important; // Purple for Phone
+      text-shadow: 0 0 10px rgba(139, 92, 246, 0.3);
+    }
+
+    .header-icon-position {
+      color: #06b6d4 !important; // Cyan for Position
+      text-shadow: 0 0 10px rgba(6, 182, 212, 0.3);
+    }
+
+    .header-icon-department {
+      color: #3b82f6 !important; // Blue for Department
+      text-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+    }
+
+    .header-icon-salary {
+      color: #059669 !important; // Green for Salary
+      text-shadow: 0 0 10px rgba(5, 150, 105, 0.3);
+    }
+
+    .header-icon-date {
+      color: #dc2626 !important; // Red for Join Date
+      text-shadow: 0 0 10px rgba(220, 38, 38, 0.3);
+    }
+
+    .header-icon-status {
+      color: #ea580c !important; // Orange for Status
+      text-shadow: 0 0 10px rgba(234, 88, 12, 0.3);
+    }
+
+    .header-icon-actions {
+      color: #64748b !important; // Slate for Actions
+      text-shadow: 0 0 10px rgba(100, 116, 139, 0.3);
+    }
+
+    // Hover effects for header icons
+    &:hover .header-icon {
+      transform: scale(1.1);
+      filter: brightness(1.2);
     }
   }
 
