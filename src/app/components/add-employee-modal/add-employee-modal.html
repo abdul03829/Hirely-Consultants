@@ -1,0 +1,287 @@
+<div class="add-employee-modal">
+  <!-- Modal Header -->
+  <div class="modal-header">
+    <div class="header-content">
+      <div class="header-icon">
+        <mat-icon>person_add</mat-icon>
+      </div>
+      <div class="header-text">
+        <h2 class="modal-title">Add New Employee</h2>
+        <p class="modal-subtitle">Fill in the employee details below</p>
+      </div>
+    </div>
+    <button
+      mat-icon-button
+      class="close-btn"
+      (click)="onCancel()"
+      matTooltip="Close"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <!-- Modal Content -->
+  <div class="modal-content">
+    <form
+      [formGroup]="employeeForm"
+      (ngSubmit)="onSubmit()"
+      class="employee-form"
+    >
+      <!-- Personal Information Section -->
+      <div class="form-section">
+        <h3 class="section-title">
+          <mat-icon class="section-icon">account_circle</mat-icon>
+          Personal Information
+        </h3>
+
+        <div class="form-row">
+          <div class="custom-form-field">
+            <label class="field-label">First Name*</label>
+            <div class="input-container">
+              <input
+                class="custom-input"
+                formControlName="firstName"
+                placeholder="Enter first name"
+                autocomplete="given-name"
+              />
+              <mat-icon class="field-icon">person</mat-icon>
+            </div>
+            <div
+              class="error-message"
+              *ngIf="
+                employeeForm.get('firstName')?.touched &&
+                employeeForm.get('firstName')?.errors
+              "
+            >
+              {{ getErrorMessage("firstName") }}
+            </div>
+          </div>
+
+          <div class="custom-form-field">
+            <label class="field-label">Last Name*</label>
+            <div class="input-container">
+              <input
+                class="custom-input"
+                formControlName="lastName"
+                placeholder="Enter last name"
+                autocomplete="family-name"
+              />
+              <mat-icon class="field-icon">person</mat-icon>
+            </div>
+            <div
+              class="error-message"
+              *ngIf="
+                employeeForm.get('lastName')?.touched &&
+                employeeForm.get('lastName')?.errors
+              "
+            >
+              {{ getErrorMessage("lastName") }}
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="custom-form-field">
+            <label class="field-label">Email Address*</label>
+            <div class="input-container">
+              <input
+                class="custom-input"
+                type="email"
+                formControlName="email"
+                placeholder="Enter email address"
+                autocomplete="email"
+              />
+              <mat-icon class="field-icon">email</mat-icon>
+            </div>
+            <div
+              class="error-message"
+              *ngIf="
+                employeeForm.get('email')?.touched &&
+                employeeForm.get('email')?.errors
+              "
+            >
+              {{ getErrorMessage("email") }}
+            </div>
+          </div>
+
+          <div class="custom-form-field">
+            <label class="field-label">Phone Number*</label>
+            <div class="input-container">
+              <input
+                class="custom-input"
+                type="tel"
+                formControlName="phone"
+                placeholder="Enter phone number"
+                autocomplete="tel"
+              />
+              <mat-icon class="field-icon">phone</mat-icon>
+            </div>
+            <div
+              class="error-message"
+              *ngIf="
+                employeeForm.get('phone')?.touched &&
+                employeeForm.get('phone')?.errors
+              "
+            >
+              {{ getErrorMessage("phone") }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Job Information Section -->
+      <div class="form-section">
+        <h3 class="section-title">
+          <mat-icon class="section-icon">work</mat-icon>
+          Job Information
+        </h3>
+
+        <div class="form-row">
+          <div class="custom-form-field">
+            <label class="field-label">Position*</label>
+            <div class="select-container">
+              <select class="custom-select" formControlName="position">
+                <option value="" disabled>Select position</option>
+                <option *ngFor="let position of positions" [value]="position">
+                  {{ position }}
+                </option>
+              </select>
+              <mat-icon class="field-icon">work_outline</mat-icon>
+            </div>
+            <div
+              class="error-message"
+              *ngIf="
+                employeeForm.get('position')?.touched &&
+                employeeForm.get('position')?.errors
+              "
+            >
+              {{ getErrorMessage("position") }}
+            </div>
+          </div>
+
+          <div class="custom-form-field">
+            <label class="field-label">Department*</label>
+            <div class="select-container">
+              <select class="custom-select" formControlName="department">
+                <option value="" disabled>Select department</option>
+                <option
+                  *ngFor="let department of departments"
+                  [value]="department"
+                >
+                  {{ department }}
+                </option>
+              </select>
+              <mat-icon class="field-icon">business</mat-icon>
+            </div>
+            <div
+              class="error-message"
+              *ngIf="
+                employeeForm.get('department')?.touched &&
+                employeeForm.get('department')?.errors
+              "
+            >
+              {{ getErrorMessage("department") }}
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="custom-form-field">
+            <label class="field-label">Annual Salary*</label>
+            <div class="input-container">
+              <span class="salary-prefix">$</span>
+              <input
+                class="custom-input salary-input"
+                type="number"
+                formControlName="salary"
+                placeholder="Enter annual salary"
+                min="0"
+              />
+              <mat-icon class="field-icon">attach_money</mat-icon>
+            </div>
+            <div
+              class="error-message"
+              *ngIf="
+                employeeForm.get('salary')?.touched &&
+                employeeForm.get('salary')?.errors
+              "
+            >
+              {{ getErrorMessage("salary") }}
+            </div>
+          </div>
+
+          <div class="custom-form-field">
+            <label class="field-label">Join Date*</label>
+            <div class="input-container">
+              <input
+                class="custom-input"
+                [matDatepicker]="joinDatePicker"
+                formControlName="joinDate"
+                placeholder="Select join date"
+                readonly
+              />
+              <mat-datepicker-toggle [for]="joinDatePicker">
+                <mat-icon matDatepickerToggleIcon class="field-icon"
+                  >event</mat-icon
+                >
+              </mat-datepicker-toggle>
+              <mat-datepicker #joinDatePicker></mat-datepicker>
+            </div>
+            <div
+              class="error-message"
+              *ngIf="
+                employeeForm.get('joinDate')?.touched &&
+                employeeForm.get('joinDate')?.errors
+              "
+            >
+              {{ getErrorMessage("joinDate") }}
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="custom-form-field status-field">
+            <label class="field-label">Employment Status*</label>
+            <div class="select-container">
+              <select class="custom-select" formControlName="status">
+                <option value="" disabled>Select status</option>
+                <option *ngFor="let status of statuses" [value]="status">
+                  {{ status }}
+                </option>
+              </select>
+              <mat-icon class="field-icon">info</mat-icon>
+            </div>
+            <div
+              class="error-message"
+              *ngIf="
+                employeeForm.get('status')?.touched &&
+                employeeForm.get('status')?.errors
+              "
+            >
+              {{ getErrorMessage("status") }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- Modal Actions -->
+  <div class="modal-actions">
+    <button mat-button type="button" class="cancel-btn" (click)="onCancel()">
+      <mat-icon class="btn-icon">close</mat-icon>
+      Cancel
+    </button>
+
+    <button
+      mat-raised-button
+      type="submit"
+      class="submit-btn"
+      [disabled]="!employeeForm.valid"
+      (click)="onSubmit()"
+    >
+      <mat-icon class="btn-icon">person_add</mat-icon>
+      Add Employee
+    </button>
+  </div>
+</div>

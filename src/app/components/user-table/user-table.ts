@@ -6,7 +6,7 @@ import {
   ChangeDetectorRef,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { MatSortModule, MatSort } from '@angular/material/sort';
@@ -18,8 +18,13 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDialogModule, MatDialog } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import { UserService } from '../../services/user';
 import { User } from '../../models/user.model';
+import { AddEmployeeModal } from '../add-employee-modal/add-employee-modal';
 
 @Component({
   selector: 'app-user-table',
@@ -27,6 +32,7 @@ import { User } from '../../models/user.model';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
@@ -38,6 +44,10 @@ import { User } from '../../models/user.model';
     MatCardModule,
     MatToolbarModule,
     MatTooltipModule,
+    MatDialogModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   templateUrl: './user-table.html',
   styleUrl: './user-table.scss',
@@ -64,7 +74,8 @@ export class UserTable implements OnInit, AfterViewInit {
 
   constructor(
     private userService: UserService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -186,5 +197,54 @@ export class UserTable implements OnInit, AfterViewInit {
   deleteUser(user: User): void {
     console.log('Deleting user:', user);
     // TODO: Implement delete functionality with confirmation
+  }
+
+  openAddEmployeeModal(): void {
+    const dialogRef = this.dialog.open(AddEmployeeModal, {
+      width: '800px',
+      maxWidth: '95vw',
+      height: 'auto',
+      maxHeight: '90vh',
+      panelClass: 'add-employee-dialog',
+      disableClose: false,
+      autoFocus: true,
+      hasBackdrop: true,
+      backdropClass: 'modal-backdrop',
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        console.log('New employee data:', result);
+        this.addNewEmployee(result);
+      }
+    });
+  }
+
+  private addNewEmployee(employeeData: Partial<User>): void {
+    // Generate a new ID (this is temporary - in real app, backend would generate this)
+    const newId = Math.max(...this.dataSource.data.map((u) => u.id), 0) + 1;
+
+    const newEmployee: User = {
+      id: newId,
+      firstName: employeeData.firstName!,
+      lastName: employeeData.lastName!,
+      email: employeeData.email!,
+      phone: employeeData.phone!,
+      position: employeeData.position!,
+      department: employeeData.department!,
+      salary: employeeData.salary!,
+      joinDate: employeeData.joinDate!,
+      status: employeeData.status!,
+    };
+
+    // Add to the data source
+    const currentData = this.dataSource.data;
+    currentData.push(newEmployee);
+    this.dataSource.data = [...currentData];
+
+    // TODO: In a real application, you would call the API to save the employee
+    // this.userService.createUser(newEmployee).subscribe(...)
+
+    console.log('Employee added successfully:', newEmployee);
   }
 }
