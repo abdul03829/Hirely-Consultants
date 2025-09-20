@@ -1,35 +1,63 @@
-<div class="user-table-container mx-auto max-w-7xl p-4 sm:p-6 lg:p-8">
-  <!-- Header Section -->
+<div
+  class="user-table-container mx-auto max-w-7xl p-4 sm:p-6 lg:p-8 min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50"
+>
+  <!-- Modern Header Section -->
   <div class="mb-8">
-    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-        <div class="mb-4 sm:mb-0">
-          <h1 class="text-3xl font-bold text-gray-900">Employee Directory</h1>
-          <p class="mt-2 text-sm text-gray-600">
-            Manage and view all employees in your organization
-          </p>
+    <div
+      class="relative overflow-hidden bg-white/70 backdrop-blur-sm rounded-3xl shadow-lg border border-white/20 p-8"
+    >
+      <div
+        class="absolute inset-0 bg-gradient-to-r from-blue-600/5 to-purple-600/5"
+      ></div>
+      <div
+        class="relative flex flex-col lg:flex-row lg:items-center lg:justify-between"
+      >
+        <div class="mb-6 lg:mb-0">
+          <div class="flex items-center mb-3">
+            <div
+              class="p-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl mr-4"
+            >
+              <mat-icon class="text-white text-2xl">groups</mat-icon>
+            </div>
+            <div>
+              <h1
+                class="text-4xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent"
+              >
+                Employee Directory
+              </h1>
+              <p class="mt-2 text-gray-600 font-medium">
+                Discover and manage your team with style
+              </p>
+            </div>
+          </div>
         </div>
         <div class="flex items-center space-x-4">
-          <mat-chip-set class="flex items-center">
-            <mat-chip class="bg-blue-50 text-blue-700 border border-blue-200">
-              Total: {{ dataSource.data.length }}
-            </mat-chip>
-          </mat-chip-set>
+          <div
+            class="bg-gradient-to-r from-blue-500 to-purple-600 p-4 rounded-2xl text-white shadow-lg"
+          >
+            <div class="text-center">
+              <div class="text-2xl font-bold">{{ dataSource.data.length }}</div>
+              <div class="text-sm opacity-90">Total Employees</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Search and Filter Section -->
-  <div class="mb-6">
-    <mat-card
-      class="shadow-sm border border-gray-100 rounded-xl overflow-hidden"
+  <!-- Modern Search and Filter Section -->
+  <div class="mb-8">
+    <div
+      class="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 p-6"
     >
-      <mat-card-content class="p-6">
-        <div
-          class="flex flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-4 sm:space-y-0"
-        >
-          <mat-form-field appearance="outline" class="flex-1 w-full sm:w-auto">
+      <div
+        class="flex flex-col lg:flex-row lg:items-center lg:space-x-6 space-y-4 lg:space-y-0"
+      >
+        <div class="flex-1">
+          <mat-form-field
+            appearance="outline"
+            class="w-full modern-search-field"
+          >
             <mat-label>Search employees...</mat-label>
             <input
               matInput
@@ -40,43 +68,60 @@
             />
             <mat-icon matSuffix class="text-gray-400">search</mat-icon>
           </mat-form-field>
+        </div>
+        <div class="flex space-x-3">
           <button
             mat-raised-button
-            color="primary"
             *ngIf="searchValue"
             (click)="clearFilter()"
-            class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition-colors duration-200"
+            class="modern-clear-btn bg-gradient-to-r from-red-500 to-pink-500 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200"
           >
             <mat-icon class="mr-2">clear</mat-icon>
             Clear
           </button>
+          <button
+            mat-raised-button
+            color="primary"
+            class="modern-action-btn bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200"
+          >
+            <mat-icon class="mr-2">add</mat-icon>
+            Add Employee
+          </button>
         </div>
-      </mat-card-content>
-    </mat-card>
+      </div>
+    </div>
   </div>
 
-  <!-- Table Section -->
+  <!-- Modern Table Section -->
   <div
-    class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden"
+    class="bg-white/70 backdrop-blur-sm rounded-3xl shadow-xl border border-white/20 overflow-hidden"
   >
     <div class="overflow-x-auto">
-      <table mat-table [dataSource]="dataSource" matSort class="w-full">
+      <table
+        mat-table
+        [dataSource]="dataSource"
+        matSort
+        class="w-full modern-table"
+      >
         <!-- ID Column -->
         <ng-container matColumnDef="id">
           <th
             mat-header-cell
             *matHeaderCellDef
             mat-sort-header
-            class="bg-gray-50 px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            class="modern-header-cell"
           >
-            ID
+            <div class="flex items-center">
+              <mat-icon class="text-gray-500 mr-2 text-lg">tag</mat-icon>
+              ID
+            </div>
           </th>
-          <td
-            mat-cell
-            *matCellDef="let user"
-            class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
-          >
-            #{{ user.id }}
+          <td mat-cell *matCellDef="let user" class="modern-cell">
+            <span
+              class="bg-gradient-to-r from-blue-100 to-purple-100 text-blue-800 px-3 py-1 rounded-full text-xs font-semibold"
+            >
+              #{{ user.id }}
+            </span>
           </td>
         </ng-container>
 
@@ -86,27 +131,30 @@
             mat-header-cell
             *matHeaderCellDef
             mat-sort-header="firstName"
-            class="bg-gray-50 px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-          >
-            Name
-          </th>
-          <td
-            mat-cell
-            *matCellDef="let user"
-            class="px-6 py-4 whitespace-nowrap"
+            class="modern-header-cell"
           >
             <div class="flex items-center">
-              <div class="flex-shrink-0 h-10 w-10">
+              <mat-icon class="text-gray-500 mr-2 text-lg">person</mat-icon>
+              Name
+            </div>
+          </th>
+          <td mat-cell *matCellDef="let user" class="modern-cell">
+            <div class="flex items-center">
+              <div class="relative flex-shrink-0 h-12 w-12 mr-4">
                 <div
-                  class="h-10 w-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white font-semibold text-sm"
+                  class="h-12 w-12 rounded-2xl bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 flex items-center justify-center text-white font-bold text-sm shadow-lg ring-2 ring-white"
                 >
                   {{ user.firstName.charAt(0) }}{{ user.lastName.charAt(0) }}
                 </div>
+                <div
+                  class="absolute -bottom-1 -right-1 h-4 w-4 bg-green-400 rounded-full border-2 border-white"
+                ></div>
               </div>
-              <div class="ml-4">
-                <div class="text-sm font-medium text-gray-900">
+              <div>
+                <div class="text-sm font-bold text-gray-900">
                   {{ user.firstName }} {{ user.lastName }}
                 </div>
+                <div class="text-xs text-gray-500 font-medium">Employee</div>
               </div>
             </div>
           </td>
@@ -118,19 +166,21 @@
             mat-header-cell
             *matHeaderCellDef
             mat-sort-header
-            class="bg-gray-50 px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            class="modern-header-cell"
           >
-            Email
+            <div class="flex items-center">
+              <mat-icon class="text-gray-500 mr-2 text-lg">email</mat-icon>
+              Email
+            </div>
           </th>
-          <td
-            mat-cell
-            *matCellDef="let user"
-            class="px-6 py-4 whitespace-nowrap"
-          >
+          <td mat-cell *matCellDef="let user" class="modern-cell">
             <a
               href="mailto:{{ user.email }}"
-              class="text-sm text-blue-600 hover:text-blue-800 hover:underline"
+              class="inline-flex items-center text-sm bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-200"
             >
+              <mat-icon class="text-blue-500 mr-2 text-sm"
+                >mail_outline</mat-icon
+              >
               {{ user.email }}
             </a>
           </td>
@@ -138,19 +188,19 @@
 
         <!-- Phone Column -->
         <ng-container matColumnDef="phone">
-          <th
-            mat-header-cell
-            *matHeaderCellDef
-            class="bg-gray-50 px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-          >
-            Phone
+          <th mat-header-cell *matHeaderCellDef class="modern-header-cell">
+            <div class="flex items-center">
+              <mat-icon class="text-gray-500 mr-2 text-lg">phone</mat-icon>
+              Phone
+            </div>
           </th>
-          <td
-            mat-cell
-            *matCellDef="let user"
-            class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
-          >
-            {{ user.phone }}
+          <td mat-cell *matCellDef="let user" class="modern-cell">
+            <div class="flex items-center text-sm text-gray-700 font-medium">
+              <mat-icon class="text-green-500 mr-2 text-sm"
+                >phone_outlined</mat-icon
+              >
+              {{ user.phone }}
+            </div>
           </td>
         </ng-container>
 
@@ -160,16 +210,15 @@
             mat-header-cell
             *matHeaderCellDef
             mat-sort-header
-            class="bg-gray-50 px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            class="modern-header-cell"
           >
-            Position
+            <div class="flex items-center">
+              <mat-icon class="text-gray-500 mr-2 text-lg">work</mat-icon>
+              Position
+            </div>
           </th>
-          <td
-            mat-cell
-            *matCellDef="let user"
-            class="px-6 py-4 whitespace-nowrap"
-          >
-            <div class="text-sm font-medium text-gray-900">
+          <td mat-cell *matCellDef="let user" class="modern-cell">
+            <div class="text-sm font-bold text-gray-900">
               {{ user.position }}
             </div>
           </td>
@@ -181,18 +230,18 @@
             mat-header-cell
             *matHeaderCellDef
             mat-sort-header
-            class="bg-gray-50 px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            class="modern-header-cell"
           >
-            Department
+            <div class="flex items-center">
+              <mat-icon class="text-gray-500 mr-2 text-lg">business</mat-icon>
+              Department
+            </div>
           </th>
-          <td
-            mat-cell
-            *matCellDef="let user"
-            class="px-6 py-4 whitespace-nowrap"
-          >
+          <td mat-cell *matCellDef="let user" class="modern-cell">
             <span
-              class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800"
+              class="inline-flex items-center px-3 py-1.5 rounded-xl text-xs font-bold bg-gradient-to-r from-indigo-100 to-blue-100 text-indigo-800 border border-indigo-200"
             >
+              <div class="w-2 h-2 bg-indigo-500 rounded-full mr-2"></div>
               {{ user.department }}
             </span>
           </td>
@@ -204,16 +253,21 @@
             mat-header-cell
             *matHeaderCellDef
             mat-sort-header
-            class="bg-gray-50 px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            class="modern-header-cell"
           >
-            Salary
+            <div class="flex items-center">
+              <mat-icon class="text-gray-500 mr-2 text-lg"
+                >attach_money</mat-icon
+              >
+              Salary
+            </div>
           </th>
-          <td
-            mat-cell
-            *matCellDef="let user"
-            class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900"
-          >
-            {{ formatSalary(user.salary) }}
+          <td mat-cell *matCellDef="let user" class="modern-cell">
+            <div
+              class="text-sm font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent"
+            >
+              {{ formatSalary(user.salary) }}
+            </div>
           </td>
         </ng-container>
 
@@ -223,16 +277,20 @@
             mat-header-cell
             *matHeaderCellDef
             mat-sort-header
-            class="bg-gray-50 px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            class="modern-header-cell"
           >
-            Join Date
+            <div class="flex items-center">
+              <mat-icon class="text-gray-500 mr-2 text-lg">event</mat-icon>
+              Join Date
+            </div>
           </th>
-          <td
-            mat-cell
-            *matCellDef="let user"
-            class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
-          >
-            {{ formatDate(user.joinDate) }}
+          <td mat-cell *matCellDef="let user" class="modern-cell">
+            <div class="flex items-center text-sm text-gray-700 font-medium">
+              <mat-icon class="text-purple-500 mr-2 text-sm"
+                >calendar_today</mat-icon
+              >
+              {{ formatDate(user.joinDate) }}
+            </div>
           </td>
         </ng-container>
 
@@ -242,21 +300,20 @@
             mat-header-cell
             *matHeaderCellDef
             mat-sort-header
-            class="bg-gray-50 px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            class="modern-header-cell"
           >
-            Status
+            <div class="flex items-center">
+              <mat-icon class="text-gray-500 mr-2 text-lg">info</mat-icon>
+              Status
+            </div>
           </th>
-          <td
-            mat-cell
-            *matCellDef="let user"
-            class="px-6 py-4 whitespace-nowrap"
-          >
+          <td mat-cell *matCellDef="let user" class="modern-cell">
             <span
               [class]="getStatusClass(user.status)"
-              class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
+              class="modern-status-badge"
             >
               <span
-                class="w-2 h-2 rounded-full mr-1.5"
+                class="status-dot"
                 [class]="getStatusClass(user.status) + '-dot'"
               ></span>
               {{ user.status }}
@@ -267,32 +324,62 @@
         <tr
           mat-header-row
           *matHeaderRowDef="displayedColumns; sticky: true"
+          class="modern-header-row"
         ></tr>
         <tr
           mat-row
           *matRowDef="let row; columns: displayedColumns"
-          class="hover:bg-gray-50 transition-colors duration-150 cursor-pointer"
+          class="modern-row group hover:bg-gradient-to-r hover:from-blue-50/50 hover:to-purple-50/50 transition-all duration-300 cursor-pointer"
         ></tr>
       </table>
     </div>
 
-    <!-- No Data Message -->
-    <div *ngIf="dataSource.filteredData.length === 0" class="text-center py-12">
-      <mat-icon class="text-6xl text-gray-300 mb-4">search_off</mat-icon>
-      <h3 class="text-lg font-medium text-gray-900 mb-2">No employees found</h3>
-      <p class="text-gray-500">
-        Try adjusting your search criteria or clear the current filters.
-      </p>
+    <!-- Modern No Data Message -->
+    <div *ngIf="dataSource.filteredData.length === 0" class="text-center py-16">
+      <div class="relative">
+        <div class="absolute inset-0 flex items-center justify-center">
+          <div
+            class="w-32 h-32 bg-gradient-to-br from-blue-100 to-purple-100 rounded-full opacity-20"
+          ></div>
+        </div>
+        <div class="relative">
+          <mat-icon class="text-6xl text-gray-300 mb-6">search_off</mat-icon>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">
+            No employees found
+          </h3>
+          <p class="text-gray-500 mb-6 max-w-md mx-auto">
+            We couldn't find any employees matching your search criteria. Try
+            adjusting your filters or clearing your search.
+          </p>
+          <button
+            mat-raised-button
+            (click)="clearFilter()"
+            class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200"
+          >
+            <mat-icon class="mr-2">refresh</mat-icon>
+            Reset Filters
+          </button>
+        </div>
+      </div>
     </div>
 
-    <!-- Pagination -->
-    <div class="bg-gray-50 px-6 py-3 border-t border-gray-200">
-      <mat-paginator
-        [pageSizeOptions]="[5, 10, 25, 50]"
-        [pageSize]="10"
-        showFirstLastButtons
-        class="bg-transparent"
-      ></mat-paginator>
+    <!-- Modern Pagination -->
+    <div
+      class="bg-gradient-to-r from-gray-50 to-blue-50 px-6 py-4 border-t border-gray-200/50"
+    >
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+        <div class="mb-4 sm:mb-0">
+          <p class="text-sm text-gray-600 font-medium">
+            Showing {{ getPaginationText() }}
+          </p>
+        </div>
+        <mat-paginator
+          [pageSizeOptions]="[5, 10, 25, 50]"
+          [pageSize]="10"
+          showFirstLastButtons
+          class="bg-transparent modern-paginator"
+        ></mat-paginator>
+      </div>
     </div>
   </div>
 </div>

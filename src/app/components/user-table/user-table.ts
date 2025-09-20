@@ -132,4 +132,20 @@ export class UserTable implements OnInit, AfterViewInit {
       day: 'numeric',
     }).format(new Date(date));
   }
+
+  getPaginationText(): string {
+    if (!this.dataSource.paginator) return '';
+
+    const startIndex =
+      this.dataSource.paginator.pageIndex * this.dataSource.paginator.pageSize +
+      1;
+    const endIndex = Math.min(
+      (this.dataSource.paginator.pageIndex + 1) *
+        this.dataSource.paginator.pageSize,
+      this.dataSource.data.length
+    );
+    const total = this.dataSource.data.length;
+
+    return `${startIndex} to ${endIndex} of ${total} employees`;
+  }
 }
