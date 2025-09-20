@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  AfterViewInit,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
@@ -56,7 +62,10 @@ export class UserTable implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource<User>();
   searchValue = '';
 
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.loadUsers();
@@ -93,6 +102,10 @@ export class UserTable implements OnInit, AfterViewInit {
       next: (users) => {
         console.log('Users loaded successfully:', users);
         this.dataSource.data = users;
+        // Use setTimeout to avoid ExpressionChangedAfterItHasBeenCheckedError
+        setTimeout(() => {
+          this.cdr.detectChanges();
+        }, 0);
       },
       error: (error) => {
         console.error('Error loading users:', error);
@@ -144,7 +157,13 @@ export class UserTable implements OnInit, AfterViewInit {
   }
 
   getPaginationText(): string {
-    if (!this.dataSource.paginator) return '';
+    if (
+      !this.dataSource.paginator ||
+      !this.dataSource.data ||
+      this.dataSource.data.length === 0
+    ) {
+      return '0 to 0 of 0 employees';
+    }
 
     const startIndex =
       this.dataSource.paginator.pageIndex * this.dataSource.paginator.pageSize +
