@@ -40,6 +40,9 @@ import { User } from '../../models/user.model';
 })
 export class AddEmployeeModal {
   employeeForm: FormGroup;
+  isLoading = false;
+  isEditMode = false;
+  employeeId?: number;
 
   positions = [
     'Software Engineer',
@@ -86,6 +89,10 @@ export class AddEmployeeModal {
     public dialogRef: MatDialogRef<AddEmployeeModal>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
+    // Check if we're in edit mode
+    this.isEditMode = !!data?.employee;
+    this.employeeId = data?.employee?.id;
+
     this.employeeForm = this.fb.group({
       firstName: ['', [Validators.required, Validators.minLength(2)]],
       lastName: ['', [Validators.required, Validators.minLength(2)]],
@@ -100,6 +107,25 @@ export class AddEmployeeModal {
       joinDate: [new Date(), Validators.required],
       status: ['Active', Validators.required],
     });
+
+    // If in edit mode, populate the form with existing data
+    if (this.isEditMode && data.employee) {
+      this.populateForm(data.employee);
+    }
+  }
+
+  private populateForm(employee: User): void {
+    this.employeeForm.patchValue({
+      firstName: employee.firstName,
+      lastName: employee.lastName,
+      email: employee.email,
+      phone: employee.phone,
+      position: employee.position,
+      department: employee.department,
+      salary: employee.salary,
+      joinDate: new Date(employee.joinDate),
+      status: employee.status,
+    });
   }
 
   onCancel(): void {
@@ -107,9 +133,11 @@ export class AddEmployeeModal {
   }
 
   onSubmit(): void {
-    if (this.employeeForm.valid) {
+    if (this.employeeForm.valid && !this.isLoading) {
+      this.isLoading = true; // Set loading state
+
       const formValue = this.employeeForm.value;
-      const newEmployee: Partial<User> = {
+      const employee: Partial<User> = {
         firstName: formValue.firstName,
         lastName: formValue.lastName,
         email: formValue.email,
@@ -121,8 +149,13 @@ export class AddEmployeeModal {
         status: formValue.status,
       };
 
-      this.dialogRef.close(newEmployee);
-    } else {
+      // Add ID for edit mode
+      if (this.isEditMode && this.employeeId) {
+        employee.id = this.employeeId;
+      }
+
+      this.dialogRef.close(employee);
+    } else if (!this.isLoading) {
       // Mark all fields as touched to show validation errors
       Object.keys(this.employeeForm.controls).forEach((key) => {
         this.employeeForm.get(key)?.markAsTouched();

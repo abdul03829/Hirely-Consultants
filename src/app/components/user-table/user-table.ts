@@ -25,6 +25,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { UserService } from '../../services/user';
 import { User } from '../../models/user.model';
 import { AddEmployeeModal } from '../add-employee-modal/add-employee-modal';
+import { DeleteConfirmationDialog } from '../delete-confirmation-dialog/delete-confirmation-dialog';
 
 @Component({
   selector: 'app-user-table',
@@ -112,7 +113,9 @@ export class UserTable implements OnInit, AfterViewInit {
     this.userService.getUsers().subscribe({
       next: (users) => {
         console.log('Users loaded successfully:', users);
-        this.dataSource.data = users;
+        // Sort users by ID in descending order (newest first) to match add behavior
+        const sortedUsers = users.sort((a, b) => (b.id || 0) - (a.id || 0));
+        this.dataSource.data = sortedUsers;
         // Use setTimeout to avoid ExpressionChangedAfterItHasBeenCheckedError
         setTimeout(() => {
           this.cdr.detectChanges();
@@ -190,13 +193,63 @@ export class UserTable implements OnInit, AfterViewInit {
   }
 
   editUser(user: User): void {
-    console.log('Editing user:', user);
-    // TODO: Implement edit functionality
+    const dialogRef = this.dialog.open(AddEmployeeModal, {
+      width: '800px',
+      maxHeight: '90vh',
+      disableClose: false,
+      data: { employee: user },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result && result.id) {
+        this.userService.updateUser(result.id, result).subscribe({
+          next: (updatedUser) => {
+            // Update the user in the local data
+            const currentData = this.dataSource.data;
+            const index = currentData.findIndex(
+              (u: User) => u.id === updatedUser.id
+            );
+            if (index !== -1) {
+              currentData[index] = updatedUser;
+              this.dataSource.data = [...currentData];
+            }
+            console.log('Employee updated successfully:', updatedUser);
+          },
+          error: (error) => {
+            console.error('Error updating employee:', error);
+          },
+        });
+      }
+    });
   }
 
   deleteUser(user: User): void {
-    console.log('Deleting user:', user);
-    // TODO: Implement delete functionality with confirmation
+    const dialogRef = this.dialog.open(DeleteConfirmationDialog, {
+      width: '400px',
+      disableClose: false,
+      data: { employee: user },
+    });
+
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed && user.id) {
+        this.userService.deleteUser(user.id).subscribe({
+          next: (success) => {
+            if (success) {
+              // Remove the user from the local data
+              const currentData = this.dataSource.data;
+              const filteredData = currentData.filter(
+                (u: User) => u.id !== user.id
+              );
+              this.dataSource.data = filteredData;
+              console.log('Employee deleted successfully:', user);
+            }
+          },
+          error: (error) => {
+            console.error('Error deleting employee:', error);
+          },
+        });
+      }
+    });
   }
 
   openAddEmployeeModal(): void {
@@ -221,11 +274,8 @@ export class UserTable implements OnInit, AfterViewInit {
   }
 
   private addNewEmployee(employeeData: Partial<User>): void {
-    // Generate a new ID (this is temporary - in real app, backend would generate this)
-    const newId = Math.max(...this.dataSource.data.map((u) => u.id), 0) + 1;
-
-    const newEmployee: User = {
-      id: newId,
+    // Prepare the employee data for API (without ID as backend will generate it)
+    const newEmployeeData: Omit<User, 'id'> = {
       firstName: employeeData.firstName!,
       lastName: employeeData.lastName!,
       email: employeeData.email!,
@@ -237,18 +287,29 @@ export class UserTable implements OnInit, AfterViewInit {
       status: employeeData.status!,
     };
 
-    // Add to the beginning of the data source (first record)
-    const currentData = this.dataSource.data;
-    this.dataSource.data = [newEmployee, ...currentData];
+    // Call the API to save the employee
+    this.userService.addUser(newEmployeeData).subscribe({
+      next: (savedEmployee: User) => {
+        console.log('Employee saved successfully to API:', savedEmployee);
 
-    // Reset pagination to first page to show the new employee
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+        // Add the saved employee (with API-generated ID) to the beginning of the data source
+        const currentData = this.dataSource.data;
+        this.dataSource.data = [savedEmployee, ...currentData];
 
-    // TODO: In a real application, you would call the API to save the employee
-    // this.userService.createUser(newEmployee).subscribe(...)
+        // Reset pagination to first page to show the new employee
+        if (this.dataSource.paginator) {
+          this.dataSource.paginator.firstPage();
+        }
 
-    console.log('Employee added successfully:', newEmployee);
+        console.log('Employee added successfully to the table');
+        // TODO: Show success notification/toast
+      },
+      error: (error) => {
+        console.error('Error saving employee to API:', error);
+
+        // Show error notification to user
+        alert('Failed to save employee. Please try again.');
+      },
+    });
   }
 }

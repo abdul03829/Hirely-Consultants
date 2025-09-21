@@ -3,11 +3,19 @@
   <div class="modal-header">
     <div class="header-content">
       <div class="header-icon">
-        <mat-icon>person_add</mat-icon>
+        <mat-icon>{{ isEditMode ? "edit" : "person_add" }}</mat-icon>
       </div>
       <div class="header-text">
-        <h2 class="modal-title">Add New Employee</h2>
-        <p class="modal-subtitle">Fill in the employee details below</p>
+        <h2 class="modal-title">
+          {{ isEditMode ? "Edit Employee" : "Add New Employee" }}
+        </h2>
+        <p class="modal-subtitle">
+          {{
+            isEditMode
+              ? "Update the employee details below"
+              : "Fill in the employee details below"
+          }}
+        </p>
       </div>
     </div>
     <button
@@ -277,11 +285,24 @@
       mat-raised-button
       type="submit"
       class="submit-btn"
-      [disabled]="!employeeForm.valid"
+      [disabled]="!employeeForm.valid || isLoading"
       (click)="onSubmit()"
     >
-      <mat-icon class="btn-icon">person_add</mat-icon>
-      Add Employee
+      <mat-icon class="btn-icon" *ngIf="!isLoading">{{
+        isEditMode ? "save" : "person_add"
+      }}</mat-icon>
+      <mat-icon class="btn-icon loading-spinner" *ngIf="isLoading"
+        >hourglass_empty</mat-icon
+      >
+      {{
+        isLoading
+          ? isEditMode
+            ? "Updating Employee..."
+            : "Adding Employee..."
+          : isEditMode
+          ? "Update Employee"
+          : "Add Employee"
+      }}
     </button>
   </div>
 </div>

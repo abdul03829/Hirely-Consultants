@@ -392,6 +392,10 @@
         box-shadow: none;
         cursor: not-allowed;
       }
+
+      .loading-spinner {
+        animation: spin 1s linear infinite;
+      }
     }
 
     @media (max-width: 768px) {
@@ -461,6 +465,15 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }
 
