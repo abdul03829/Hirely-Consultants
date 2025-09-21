@@ -1,0 +1,19 @@
+<div class="custom-toast" [ngClass]="'toast-' + data.type">
+  <div class="toast-content">
+    <div class="toast-icon">
+      <mat-icon>{{ getIcon() }}</mat-icon>
+    </div>
+    <div class="toast-message">
+      {{ data.message }}
+    </div>
+    <button
+      mat-icon-button
+      class="toast-close-btn"
+      (click)="close()"
+      aria-label="Close toast"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div class="toast-progress" [ngClass]="'progress-' + data.type"></div>
+</div>

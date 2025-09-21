@@ -26,6 +26,7 @@ import { UserService } from '../../services/user';
 import { User } from '../../models/user.model';
 import { AddEmployeeModal } from '../add-employee-modal/add-employee-modal';
 import { DeleteConfirmationDialog } from '../delete-confirmation-dialog/delete-confirmation-dialog';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-user-table',
@@ -76,7 +77,8 @@ export class UserTable implements OnInit, AfterViewInit {
   constructor(
     private userService: UserService,
     private cdr: ChangeDetectorRef,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -214,9 +216,20 @@ export class UserTable implements OnInit, AfterViewInit {
               this.dataSource.data = [...currentData];
             }
             console.log('Employee updated successfully:', updatedUser);
+
+            // Show success notification
+            this.notificationService.showEmployeeUpdated(
+              `${updatedUser.firstName} ${updatedUser.lastName}`
+            );
           },
           error: (error) => {
             console.error('Error updating employee:', error);
+
+            // Show error notification
+            const errorMessage =
+              error.error?.userMessage ||
+              'Failed to update employee. Please try again.';
+            this.notificationService.showEmployeeUpdateError(errorMessage);
           },
         });
       }
@@ -242,10 +255,21 @@ export class UserTable implements OnInit, AfterViewInit {
               );
               this.dataSource.data = filteredData;
               console.log('Employee deleted successfully:', user);
+
+              // Show success notification
+              this.notificationService.showEmployeeDeleted(
+                `${user.firstName} ${user.lastName}`
+              );
             }
           },
           error: (error) => {
             console.error('Error deleting employee:', error);
+
+            // Show error notification
+            const errorMessage =
+              error.error?.userMessage ||
+              'Failed to delete employee. Please try again.';
+            this.notificationService.showEmployeeDeleteError(errorMessage);
           },
         });
       }
@@ -302,13 +326,20 @@ export class UserTable implements OnInit, AfterViewInit {
         }
 
         console.log('Employee added successfully to the table');
-        // TODO: Show success notification/toast
+
+        // Show success notification
+        this.notificationService.showEmployeeCreated(
+          `${savedEmployee.firstName} ${savedEmployee.lastName}`
+        );
       },
       error: (error) => {
         console.error('Error saving employee to API:', error);
 
         // Show error notification to user
-        alert('Failed to save employee. Please try again.');
+        const errorMessage =
+          error.error?.userMessage ||
+          'Failed to save employee. Please try again.';
+        this.notificationService.showEmployeeCreateError(errorMessage);
       },
     });
   }

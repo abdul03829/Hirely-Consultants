@@ -153,18 +153,34 @@ export class InterceptorDemoComponent {
 
   showNotifications(): void {
     console.log('🧪 Testing Notifications');
-    this.notificationService.showSuccess('This is a success message!');
+    this.notificationService.showSuccess(
+      'Employee created successfully!',
+      4000,
+      'person_add'
+    );
 
     setTimeout(() => {
-      this.notificationService.showWarning('This is a warning message!');
+      this.notificationService.showWarning(
+        'Please review the pending applications.',
+        4000,
+        'warning'
+      );
     }, 1000);
 
     setTimeout(() => {
-      this.notificationService.showInfo('This is an info message!');
+      this.notificationService.showInfo(
+        'System maintenance scheduled for tonight.',
+        4000,
+        'schedule'
+      );
     }, 2000);
 
     setTimeout(() => {
-      this.notificationService.showError('This is an error message!');
+      this.notificationService.showError(
+        'Failed to connect to the server.',
+        4000,
+        'error'
+      );
     }, 3000);
   }
 }

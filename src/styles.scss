@@ -85,3 +85,48 @@ body {
 .info-snackbar .mat-mdc-snack-bar-action {
   color: white !important;
 }
+
+/* Modern Toast Container */
+.modern-toast-container {
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 16px !important;
+  border-radius: 0 !important;
+}
+
+.modern-toast-container .mat-mdc-snack-bar-container {
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
+}
+
+/* Hide default snackbar styling when using custom component */
+.modern-toast-container .mdc-snackbar__surface {
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.modern-toast-container .mat-mdc-snack-bar-label {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Prevent any animation conflicts */
+.modern-toast-container .mdc-snackbar--open {
+  animation: none !important;
+  transform: none !important;
+}
+
+.modern-toast-container .mdc-snackbar--opening {
+  animation: none !important;
+}
+
+.modern-toast-container .mdc-snackbar--closing {
+  animation: none !important;
+}
